@@ -32,11 +32,13 @@ class CreateCandidateController extends Controller
 
             $file = $request->file('resume');
             $filePath = $file->store('public/resumes');
+            // $file = $request->file('resume');
+            // $filePath = $file->store('uploads', 'public');
             $authUser = optional(Auth::user());
             $pathResume = Storage::url($filePath);
             $candidate = Auth::user()->candidate;
             $response = GenAIController::sendToGenerativeAI($file);
-            return $response;
+            // return $response;
             $educationData = $response['education'] ?? [];
             $workExperienceData = $response['work_experience'] ?? [];
             $personalInfo = $response['personal_info'] ?? [];
