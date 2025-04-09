@@ -61,6 +61,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/gen-ai/upload', [GenAIController::class, 'upload']);
+
 Route::post('/users/register', [UserController::class, 'register']);
 
 Route::prefix('interviews')->group(function () {
