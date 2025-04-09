@@ -121,4 +121,23 @@ class JobController extends Controller
             'data' => $jobs,
         ]);
     }
+
+    public function deleteCandidate(Job $job, int $candidateId)
+    {
+        try {
+            DB::beginTransaction();
+
+            $job->candidateJobs()->where('candidate_id', $candidateId)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Candidate deleted successfully',
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+    }
 }
