@@ -11,7 +11,7 @@
             <el-dropdown class="flex items-center" trigger="click">
                 <span class="el-dropdown-link material-icons-outlined">more_vert</span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>{{ $t('add candidate') }}</el-dropdown-item>
+                    <el-dropdown-item @click.native="openCandidateModal">{{ $t('add candidate') }}</el-dropdown-item>
                     <el-dropdown-item
                         @click.native="openEditStageAction(stage)"
                     >
@@ -36,6 +36,7 @@
                     :candidate="candidate"
                     :open-interview-form="openInterviewForm"
                     :star-candidate="starCandidate"
+                    :job-id="jobId"
                 />
             </div>
         </draggable>
@@ -47,6 +48,7 @@
             :assessment-forms="assessmentForms"
             :submit-form="createInterviewSchedule"
         />
+        <CandidateModal ref="candidateModal" :job-id="jobId" />
     </div>
 </template>
 
@@ -55,6 +57,7 @@
     import CreateInterviewForm from '~/components/Interview/CreateForm/index.vue';
     import CandidateCard from '../../Candidate/CandidateCard.vue';
     import mixin from './mixin';
+    import CandidateModal from '~/components/Pipeline/Modal/CanidateModal.vue';
 
     export default {
         name: 'StageKanban',
@@ -63,9 +66,16 @@
             draggable,
             CandidateCard,
             CreateInterviewForm,
+            CandidateModal,
         },
 
         mixins: [mixin],
+
+        methods: {
+            openCandidateModal() {
+                this.$refs.candidateModal.visible = true;
+            },
+        },
     };
 </script>
 

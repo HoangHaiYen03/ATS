@@ -23,13 +23,13 @@
                         <h3 class="text-xl font-bold mb-4">MENU</h3>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <nuxt-link to="/" class="block mb-2 hover:text-gray-300">Trang chủ</nuxt-link>
-                                <nuxt-link to="/about" class="block mb-2 hover:text-gray-300">Về chúng tôi</nuxt-link>
-                                <nuxt-link to="/jobs" class="block mb-2 hover:text-gray-300">Việc làm</nuxt-link>
+                                <nuxt-link to="/ats" class="block mb-2 hover:text-gray-300">Trang chủ</nuxt-link>
+                                <nuxt-link to="/ats/about" class="block mb-2 hover:text-gray-300">Về chúng tôi</nuxt-link>
+                                <nuxt-link to="/ats/jobs" class="block mb-2 hover:text-gray-300">Việc làm</nuxt-link>
                             </div>
-                            <div>
-                                <nuxt-link to="/contact" class="block mb-2 hover:text-gray-300">Liên hệ</nuxt-link>
-                            </div>
+                            <!-- <div>
+                                <nuxt-link to="/ats/contact" class="block mb-2 hover:text-gray-300">Liên hệ</nuxt-link>
+                            </div> -->
                         </div>
                     </div>
 

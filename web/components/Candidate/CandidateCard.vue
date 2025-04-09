@@ -25,7 +25,7 @@
                                 >
                                     {{ $t('view detail') }}
                                 </el-dropdown-item>
-                                <el-dropdown-item>{{ $t('delete') }}</el-dropdown-item>
+                                <el-dropdown-item @click.native="deleteCandidate(candidate.id)">{{ $t('delete') }}</el-dropdown-item>
                                 <el-dropdown-item
                                     @click.native="openInterviewForm(candidate)"
                                 >
@@ -90,6 +90,10 @@
                 type: Function,
                 required: true,
             },
+            jobId: {
+                type: Number,
+                required: true,
+            },
         },
 
         computed: {
@@ -110,6 +114,19 @@
             },
             clickShowInterviews() {
                 this.handleShowInterviews(this.$(this.candidate, 'id'));
+            },
+            async deleteCandidate(candidateId) {
+                try {
+                    await this.$axios.$delete(`/jobs/${this.jobId}/candidates/${candidateId}`);
+                    this.$message({
+                        type: 'success',
+                        message: 'Xóa ứng viên thành công',
+                    });
+                } catch (error) {
+                    this.$handleError(error);
+                } finally {
+                    window.location.reload();
+                }
             },
         },
     };
