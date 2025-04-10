@@ -3,7 +3,7 @@
         <div class="flex justify-start">
             <el-avatar
                 :size="100"
-                :src="require('~/assets/images/logo-icon.png')"
+                :src="require('~/assets/images/logo-2.png')"
             />
             <div class="info ml-5">
                 <div class="font-semibold text-xl uppercase leading-relaxed pb-2">

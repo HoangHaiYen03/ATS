@@ -62,9 +62,6 @@ export default {
             required: true,
         },
     },
-    created() {
-        console.log('dsadas', this.jobId);
-    },
     methods: {
         changeFileList(file, fileList) {
             this.fileList = fileList;

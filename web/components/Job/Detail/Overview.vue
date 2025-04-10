@@ -4,7 +4,7 @@
             <div class="px-10 -mt-20 flex-auto text-center">
                 <el-avatar
                     :size="150"
-                    :src="require('~/assets/images/logo-icon.png')"
+                    :src="require('~/assets/images/logo-2.png')"
                 />
             </div>
             <div class="px-10 mt-5">

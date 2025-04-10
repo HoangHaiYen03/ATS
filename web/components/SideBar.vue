@@ -13,7 +13,7 @@
             <nuxt-link to="/" class="flex justify-center mt-4 mb-3">
                 <img
                     v-if="sidebarCollapsed"
-                    src="@/assets/images/logo-icon.png"
+                    src="@/assets/images/logo-2.png"
                     alt="Logo"
                     title="Atlantic Careers"
                     class="logo-icon"
@@ -136,6 +136,7 @@
     }
 
     .logo-icon {
-        height: 45px;
+        width: 40px;
+        height: 40px;
     }
 </style>
