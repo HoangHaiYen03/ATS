@@ -51,6 +51,20 @@ class CreateCandidateController extends Controller
                 'address' => $personalInfo['address'],
             ]);
 
+            if (!$authUser->candidate) {
+                $authUser->candidate()->create([
+                    'resume_url' => $pathResume,
+                    'status' => CandidateStatus::NEW,
+                ]);
+                $authUser->refresh();
+                $candidate = $authUser->candidate;
+            } else {
+                $authUser->candidate->update([
+                    // 'resume_url' => $pathResume,
+                    'status' => CandidateStatus::NEW,
+                ]);
+            }
+
             if (!empty($educationData)) {
                 foreach ($educationData as $edu) {
                     $startDate = null;
@@ -68,7 +82,7 @@ class CreateCandidateController extends Controller
                         'grade' => $edu['grade'] ?? 'Not Available',
                         'start_date' => $startDate,
                         'end_date' => $endDate,
-                        'candidate_id' => $authUser->candidate->id,
+                        'candidate_id' => $candidate->id
                     ]);
                 }
             }
@@ -96,17 +110,17 @@ class CreateCandidateController extends Controller
                 }
             }
 
-            if (!$authUser->candidate) {
-                $authUser->candidate()->create([
-                    'resume_url' => $pathResume,
-                    'status' => CandidateStatus::NEW,
-                ]);
-            } else {
-                $authUser->candidate->update([
-                    'resume_url' => $pathResume,
-                    'status' => CandidateStatus::NEW,
-                ]);
-            }
+            // if (!$authUser->candidate) {
+            //     $authUser->candidate()->create([
+            //         'resume_url' => $pathResume,
+            //         'status' => CandidateStatus::NEW,
+            //     ]);
+            // } else {
+            //     $authUser->candidate->update([
+            //         // 'resume_url' => $pathResume,
+            //         'status' => CandidateStatus::NEW,
+            //     ]);
+            // }
 
             $stage = optional($job->pipeline)->stages[0];
             $job->candidateJobs()->create([

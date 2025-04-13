@@ -42,15 +42,15 @@ class GenAIController extends Controller
      */
     static function sendToGenerativeAI($file): mixed
     {
-        $apiKey = env('GOOGLE_GEMINI_API_KEY');
+        // $apiKey = env('GOOGLE_GEMINI_API_KEY');
+        $apiKey = 'AIzaSyAs0F3j_BZrxSp9eHpWlRmDrhLk7wSFk2o';
         // $client = new GuzzleClient();
         $client = new \GuzzleHttp\Client([
             'headers' => [
                 'Content-Encoding' => 'gzip'
             ]
         ]);
-        $response = $client->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-exp-03-25:generateContent', [
-            'query' => ['key' => $apiKey],
+        $response = $client->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-exp-03-25:generateContent?key=' . $apiKey, [
          'json' => [
                 'contents' => [
                     ['parts' => [
