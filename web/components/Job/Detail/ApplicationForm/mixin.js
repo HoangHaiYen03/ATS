@@ -60,6 +60,8 @@ export default {
 
                 await await this.$axios.$post(`jobs/${this.job.id}/candidates`, formData);
 
+                await this.$auth.fetchUser();
+
                 this.$alert(this.$t('apply_successfully'), this.$t('congratulations'), {
                     confirmButtonText: this.$t('close'),
                     callback: () => {
