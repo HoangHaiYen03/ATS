@@ -42,8 +42,7 @@ class GenAIController extends Controller
      */
     static function sendToGenerativeAI($file): mixed
     {
-        // $apiKey = env('GOOGLE_GEMINI_API_KEY');
-        $apiKey = 'AIzaSyAs0F3j_BZrxSp9eHpWlRmDrhLk7wSFk2o';
+        $apiKey = env('GOOGLE_GEMINI_API_KEY');
         // $client = new GuzzleClient();
         $client = new \GuzzleHttp\Client([
             'headers' => [
