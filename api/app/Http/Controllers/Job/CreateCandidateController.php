@@ -43,11 +43,21 @@ class CreateCandidateController extends Controller
             $authUser = optional(Auth::user());
             $pathResume = Storage::url($filePath);
             $candidate = Auth::user()->candidate;
-            $response = GenAIController::sendToGenerativeAI($file);
-            // return $response;
-            $educationData = $response['education'] ?? [];
-            $workExperienceData = $response['work_experience'] ?? [];
-            $personalInfo = $response['personal_info'] ?? [];
+            
+            // Khởi tạo mảng dữ liệu trống
+            $educationData = [];
+            $workExperienceData = [];
+            $personalInfo = [];
+            
+            try {
+                $response = GenAIController::sendToGenerativeAI($file);
+                $educationData = $response['education'] ?? [];
+                $workExperienceData = $response['work_experience'] ?? [];
+                $personalInfo = $response['personal_info'] ?? [];
+            } catch (Exception $e) {
+                // Ghi log lỗi nhưng vẫn tiếp tục với dữ liệu trống
+                Log::error('GenAI Error: ' . $e->getMessage());
+            }
 
             $authUser->update([
                 // 'name' => $personalInfo['full_name'],
@@ -138,6 +148,15 @@ class CreateCandidateController extends Controller
             return CandidateResource::make($candidate->load('user'));
         } catch (Exception $e) {
             DB::rollback();
+
+            // Kiểm tra nếu lỗi liên quan đến GenAI
+            if (strpos($e->getMessage(), 'generativelanguage.googleapis.com') !== false) {
+                Log::error('GenAI Service Unavailable: ' . $e->getMessage());
+                return response()->json([
+                    'message' => 'Hệ thống hiện không thể phân tích CV của bạn. CV của bạn đã được lưu và bạn có thể cập nhật thông tin thủ công.',
+                    'errors' => ['resume' => ['Dịch vụ phân tích CV đang bận, vui lòng thử lại sau hoặc cập nhật thông tin thủ công.']]
+                ], 503);
+            }
 
             throw $e;
         }
