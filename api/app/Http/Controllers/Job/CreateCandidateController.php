@@ -62,9 +62,9 @@ class CreateCandidateController extends Controller
             $authUser->update([
                 // 'name' => $personalInfo['full_name'],
                 // 'email' =>  $personalInfo['email'],
-                'phone_number' => $personalInfo['phone_number'],
-                'gender' => $personalInfo['gender'],
-                'address' => $personalInfo['address'],
+                'phone_number' => $personalInfo['phone_number'] ?? '',
+                'gender' => $personalInfo['gender'] ?? '',
+                'address' => $personalInfo['address'] ?? '',
             ]);
             
             // Tạo candidate trước nếu chưa tồn tại

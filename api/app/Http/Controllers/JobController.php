@@ -9,6 +9,7 @@ use App\Repositories\Job\JobRepositoryInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use function response;
 
 class JobController extends Controller
@@ -115,6 +116,8 @@ class JobController extends Controller
 
     public function getAppliedJobs(int $candidateId)
     {
+        $users = User::find($candidateId);
+        $candidateId = $users->candidate->id ?? 0;
         $jobs = $this->jobRepository->getAppliedJobs($candidateId);
 
         return response()->json([
