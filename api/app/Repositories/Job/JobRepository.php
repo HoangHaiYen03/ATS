@@ -71,6 +71,7 @@ class JobRepository extends BaseRepository implements JobRepositoryInterface
     public function getAppliedJobs(int $candidateId)
     {
         $data = CandidateJob::query()->where('candidate_id', $candidateId)
+            ->orderBy('created_at', 'desc')
             ->with(['job', 'stage'])
             ->get();
 
