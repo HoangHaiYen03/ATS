@@ -81,6 +81,7 @@ export default {
                         formData.append('resume', this.form.resume, this.form.resume.name);
 
                         await this.$axios.$post(`jobs/${this.jobId}/admin/candidates`, formData);
+                        this.$message.success(this.$t('create successfully'));
 
                         this.visible = false;
                     } catch (error) {
