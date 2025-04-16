@@ -163,7 +163,6 @@
                 });
             },
             triggerActions(stage, candidate) {
-                console.log(2);
                 const actions = this.$get(stage, 'actions', []);
 
                 _each(actions, (action) => {
