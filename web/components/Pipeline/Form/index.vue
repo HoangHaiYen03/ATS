@@ -46,7 +46,7 @@
                         <div class="staff-card shadow-md border flex justify-between mb-8 p-3 rounded-md">
                             <div class="flex justify-start">
                                 <div>
-                                    <el-avatar size="large" :src="require('~/assets/images/logo-icon.png')" />
+                                    <el-avatar size="large" :src="require('~/assets/images/logo-2.png')" />
                                 </div>
                                 <div class="info ml-2">
                                     <p class="text font-semibold text-lg">{{ $get(job, 'name') }}</p>

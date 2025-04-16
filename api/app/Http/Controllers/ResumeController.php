@@ -8,6 +8,7 @@ use App\Models\Resume;
 use App\Repositories\Resume\ResumeRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\Candidate\CandidateStatus;
 
 class ResumeController extends Controller
 {
@@ -20,6 +21,13 @@ class ResumeController extends Controller
     public function index()
     {
         $candidate = Auth::user()->candidate;
+        if (!$candidate) {
+            Auth::user()->candidate()->create([
+                'status' => CandidateStatus::NEW,
+            ]);
+            Auth::user()->refresh();
+            $candidate = Auth::user()->candidate;
+        }
         $resumes = $candidate->resumes;
 
         return ResumeResource::collection($resumes);

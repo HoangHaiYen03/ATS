@@ -11,7 +11,7 @@
                     <template slot-scope="{ row }">
                         <div class="flex justify-start items-center">
                             <div>
-                                <el-avatar :src="require('~/assets/images/logo-icon.png')" class="mr-3" />
+                                <el-avatar :src="require('~/assets/images/logo-2.png')" class="mr-3" />
                             </div>
                             <span class="font-semibold">{{ $get(row, 'name') }}</span>
                         </div>

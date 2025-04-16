@@ -1,7 +1,7 @@
 <template>
     <div class="h-screen w-full flex items-center justify-center">
         <img
-            src="@/assets/images/logo.png"
+            src="@/assets/images/logo-2.png"
             alt="Logo"
             class="logo absolute left-0 top-0 mt-4 ml-4"
         >

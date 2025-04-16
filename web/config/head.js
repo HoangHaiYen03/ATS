@@ -7,7 +7,7 @@ export default {
         { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+        { rel: 'icon', type: 'image/x-icon', href: '/logo-2.png' },
         {
             rel: 'stylesheet',
             href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap',

@@ -9,6 +9,7 @@ use App\Repositories\Job\JobRepositoryInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use function response;
 
 class JobController extends Controller
@@ -115,10 +116,31 @@ class JobController extends Controller
 
     public function getAppliedJobs(int $candidateId)
     {
+        $users = User::find($candidateId);
+        $candidateId = $users->candidate->id ?? 0;
         $jobs = $this->jobRepository->getAppliedJobs($candidateId);
 
         return response()->json([
             'data' => $jobs,
         ]);
+    }
+
+    public function deleteCandidate(Job $job, int $candidateId)
+    {
+        try {
+            DB::beginTransaction();
+
+            $job->candidateJobs()->where('candidate_id', $candidateId)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Candidate deleted successfully',
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
     }
 }

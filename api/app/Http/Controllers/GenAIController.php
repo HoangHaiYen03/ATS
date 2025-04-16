@@ -49,12 +49,19 @@ class GenAIController extends Controller
                 'Content-Encoding' => 'gzip'
             ]
         ]);
-        $response = $client->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-exp-03-25:generateContent', [
-            'query' => ['key' => $apiKey],
-         
+        $response = $client->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-exp-03-25:generateContent?key=' . $apiKey, [
+         'json' => [
                 'contents' => [
-                    ['parts' => [['text' =>  base64_encode(file_get_contents($file->getRealPath())) . '
-                        dựa vào file base64 của hình ảnh trên phân tích kỹ lưỡng văn bản CV tiếng Việt sau và trích xuất thông tin theo cấu trúc JSON dưới đây. Hãy đặc biệt chú ý đến các tiêu đề mục, từ khóa và định dạng thường gặp trong CV tiếng Việt.
+                    ['parts' => [
+                        [
+                            'inlineData' => [
+'mimeType' => 'image/png',
+ 'data' => base64_encode(file_get_contents($file->getRealPath()))
+                        ],
+                    ],
+                        [
+                            'text' =>  '
+                        Dựa vào nội dung trên, hãy phân tích kỹ lưỡng văn bản CV tiếng Việt sau và trích xuất thông tin theo cấu trúc JSON dưới đây. Hãy đặc biệt chú ý đến các tiêu đề mục, từ khóa và định dạng thường gặp trong CV tiếng Việt.
 
 1️⃣ Thông tin cá nhân ("personal_info")
 Tìm và trích xuất các chi tiết sau, thường nằm ở đầu CV hoặc dưới các tiêu đề như "Thông tin cá nhân", "Thông tin liên hệ":
@@ -126,7 +133,7 @@ Xử lý định dạng ngày tháng Việt Nam: Nhận dạng và chuyển đ�
 
 Linh hoạt với cấu trúc CV: Hiểu rằng các CV có thể có bố cục và tiêu đề mục khác nhau, cố gắng nhận dạng nội dung dựa trên ngữ cảnh.
 
-']]]
+']]]]
             
             ]
         ]);

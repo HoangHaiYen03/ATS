@@ -34,8 +34,8 @@
                 </el-button>
             </el-form-item>
         </el-form>
-        <el-divider>{{ $t('or') }}</el-divider>
-        <div class="flex justify-center">
+        <!-- <el-divider></el-divider> -->
+        <!-- <div class="flex justify-center">
             <img
                 src="~/assets/images/google.png"
                 alt="google"
@@ -48,7 +48,7 @@
                 class="social-icon cursor-pointer"
                 @click="loginWithFacebook"
             >
-        </div>
+        </div> -->
         <div class="text-center mt-4">
             <span>
                 Bạn chưa có tài khoản,
